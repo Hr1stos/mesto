@@ -32,5 +32,3 @@ popupInfo.addEventListener('submit', function(event) {
 
 	saveButton.addEventListener('click', closePopup);
 })
-
-//console.log(opsaneImput)
