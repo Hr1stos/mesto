@@ -7,6 +7,7 @@
 	box-sizing: border-box;
 	cursor: pointer;
 	width: 24px;
+	height: 24px;
 	transition: opacity .3s ease;
 	margin-top: 15px;
 }
@@ -19,7 +20,7 @@
 	.profile__edit-button {
 		max-height: 18px;
 		max-width: 18px;
-		margin: 8px 19px 0 0 ;
+		margin: 8px 19px 0 0;
 		background-size: 7.5px;
 	}
 }
