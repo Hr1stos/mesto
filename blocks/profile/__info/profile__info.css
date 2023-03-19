@@ -1,17 +1,16 @@
 .profile__info {
 	margin: 28px auto 25px 30px;
 	min-width: 336px;
-	display: grid;
-	grid-template-columns: repeat(2, minmax(min-content, max-content));
-	grid-template-rows: repeat(2, minmax(min-content, max-content));
-	gap: 8px 18px;
+	display: flex;
+	flex-direction: column;
+	row-gap: 8px;
 }
 
 @media screen and (max-width: 699px) {
 	.profile__info {
 		margin: 26px 0 0;
-		gap: 8px 10px;
+		row-gap: 8px;
 		min-width: 282px;
-		justify-items: end;
+		text-align: center;
 	}
 }

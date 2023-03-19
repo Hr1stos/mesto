@@ -9,7 +9,7 @@
 </head>
 
 <body class="page">
-	<div class="page__conteiner">
+	<div class="page__container">
 	
 		<header class="header page__header">
 			<img src="./images/header-logo.svg" alt="Логотип место" class="header__logo">
@@ -19,15 +19,17 @@
 			<section class="profile content__profile">
 				<img src="./images/avatar.jpg" alt="Жак-Ив Кусто" class="profile__avatar">
 				<div class="profile__info">
-					<h1 class="profile__name">Жак-Ив Кусто</h1>
-					<button aria-label="Редактироване" type="button" class="profile__edit-button"></button>
+					<div class="profile__container">
+						<h1 class="profile__name">Жак-Ив Кусто</h1>
+						<button aria-label="Редактироване" type="button" class="profile__edit-button"></button>
+					</div>
 					<p class="profile__opsane">Исследователь океана</p>
 				</div>
 				<button aria-label="Добавление" type="button" class="profile__add-button"></button>
 			</section>
 
 			<section class="cards">
-				<ul class="cards__conteiner">
+				<ul class="cards__container">
 					<li class="cards__item">
 						<img src="./images/Karachaevsk.jpg" alt="Старнное здане в горах" class="cards__image">
 						<div class="cards__name">
@@ -89,8 +91,8 @@
 				<button aria-label="Закрыть" type="button" class="popup__close-button"></button>
 				<h2 class="popup__title">Редактировать профиль</h2>
 				<form name="popup-form" class="popup__form">
-					<input type="text" name="name" class="popup__input popup__input_type_name">
-					<input type="text" name="opsane" class="popup__input popup__input_type_opsane">
+					<input type="text" required name="name" class="popup__input popup__input_type_name">
+					<input type="text" required name="opsane" class="popup__input popup__input_type_opsane">
 					<button type="submit" class="popup__save-button">Сохранить</button>
 				</form>
 			</div>
