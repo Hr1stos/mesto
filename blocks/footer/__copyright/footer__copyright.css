@@ -5,7 +5,6 @@
 	color: #545454;
 	margin: 0;
 	max-width: 318px;
-	max-height: 18px;
 }
 
 @media screen and (max-width: 580px) {
@@ -14,6 +13,5 @@
 		font-size: 14px;
 		line-height: 17px;
 		max-width: 282px;
-		max-height: 14px;
 	}
 }
