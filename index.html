@@ -39,27 +39,26 @@
 			<p class="footer__copyright">© 2020 Mesto Russia</p>
 		</footer>
 
-		<template class="template_popup">
-			<div class="popup">
-				<div class="popup__container">
-					<button aria-label="Закрыть" type="button" class="popup__close-button"></button>
-					<h2 class="popup__title">Редактировать профиль</h2>
-					<form name="popup-form" class="popup__form">
-						<input type="text" required name="name" class="popup__input popup__input_type_name">
-						<input type="text" required name="opsane" class="popup__input popup__input_type_opsane">
-						<button type="submit" class="popup__save-button">Сохранить</button>
-					</form>
-				</div>
+		<div class="popup">
+			<div class="popup__container">
+				<button aria-label="Закрыть" type="button" class="popup__close-button"></button>
+				<h2 class="popup__title">Редактировать профиль</h2>
+				<form name="popup-form" class="popup__form">
+					<input type="text" required name="name" class="popup__input popup__input_type_name">
+					<input type="text" required name="opsane" class="popup__input popup__input_type_opsane">
+					<button type="submit" class="popup__save-button">Сохранить</button>
+				</form>
 			</div>
-		</template>
+		</div>
 
 		<template class="template_cards">
 			<li class="cards__item">
 				<img src="" alt="" class="cards__image">
 				<div class="cards__name">
 					<h2 class="cards__title"></h2>
-					<button aria-label="Мне нравтся" type="button" class="cards__button"></button>
+					<button aria-label="Мне нравтся" type="button" class="cards__button_like"></button>
 				</div>
+				<button aria-label="Удалить" type="button" class="cards__button_delete"></button>
 			</li>
 		</template>
 

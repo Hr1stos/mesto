@@ -1,5 +1,5 @@
-.cards__button {
-	background: url('../../../images/heart.svg');
+.cards__button_like {
+	background: url('../../../../images/heart.svg');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -12,11 +12,6 @@
   border: none;
 }
 
-.cards__button:hover {
+.cards__button_like:hover {
 	opacity: .5;
-}
-
-.cards__button:active {
-	background: url('../../../images/heart-active.svg');
-	opacity: 1;
 }
