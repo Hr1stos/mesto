@@ -30,7 +30,6 @@ function createCardElement (cardData) {
 		openPopup(popupImage);
 		const image = popupImage.querySelector('.popup__img');
 		const caption = popupImage.querySelector('.popup__caption');
-		const nameCerd = document.querySelector('.cards__title');
 
 		image.src = imageCard.src;
 		image.alt = imageCard.alt;
