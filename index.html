@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Место</title>
 	<link rel="stylesheet" href="./pages/index.css">
+	<script src="./scripts/index.js" type="module"></script>
 </head>
 
 <body class="page">
@@ -39,14 +40,26 @@
 			<p class="footer__copyright">© 2020 Mesto Russia</p>
 		</footer>
 
-		<div class="popup">
+		<div class="popup popup_edit">
 			<div class="popup__container">
-				<button aria-label="Закрыть" type="button" class="popup__close-button"></button>
+				<button aria-label="Закрыть" type="button" class="popup__close-button popup__close-button_edit"></button>
 				<h2 class="popup__title">Редактировать профиль</h2>
 				<form name="popup-form" class="popup__form">
 					<input type="text" required name="name" class="popup__input popup__input_type_name">
 					<input type="text" required name="opsane" class="popup__input popup__input_type_opsane">
 					<button type="submit" class="popup__save-button">Сохранить</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="popup popup_add">
+			<div class="popup__container">
+				<button aria-label="Закрыть" type="button" class="popup__close-button popup__close-button_add"></button>
+				<h2 class="popup__title">Новое место</h2>
+				<form name="popup-form" class="popup__form">
+					<input type="text" required name="name" placeholder="Название" class="popup__input popup__input_type_name">
+					<input type="text" required name="opsane" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link">
+					<button type="submit" class="popup__save-button">Создать</button>
 				</form>
 			</div>
 		</div>
@@ -62,7 +75,6 @@
 			</li>
 		</template>
 
-		<script src="./scripts/index.js"></script>
 	</div>
 
 </body>
