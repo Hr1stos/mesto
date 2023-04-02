@@ -1,4 +1,4 @@
-.cards__name {
+.card__name {
 	display: flex;
 	justify-content: space-between;
 	min-width: 246px;

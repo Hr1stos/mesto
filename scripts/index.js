@@ -2,38 +2,38 @@ import { initialCards } from "./constants.js";
 
 //****Создание карточек на страницу, лайки, удаление карточки, открытие PopupImage****
 const cardsTemplate = document.querySelector('.template-cards');
+const image = document.querySelector('.popup__img');
 function createCardElement (cardData) {
 	const cardElement = cardsTemplate.content
-		.querySelector('.cards__item')
+		.querySelector('.card')
 		.cloneNode(true);
 
-	const imageCard = cardElement.querySelector('.cards__image');
-	const nameCerd = cardElement.querySelector('.cards__title');
+	const imageCard = cardElement.querySelector('.card__image');
+	const nameCerd = cardElement.querySelector('.card__title');
 
 	imageCard.src = cardData.link;
 	imageCard.alt = cardData.name;
 	nameCerd.textContent = cardData.name;
 
-	const likeButton = cardElement.querySelector('.cards__button_like');
+	const likeButton = cardElement.querySelector('.card__button_like');
 	function handleLike() {
-		likeButton.classList.toggle('cards__button_like_active');
+		likeButton.classList.toggle('card__button_like_active');
 	};
 	likeButton.addEventListener('click', handleLike);
 
-	const deleteButton = cardElement.querySelector('.cards__button_delete');
+	const buttonDeleteCard = cardElement.querySelector('.card__button_delete');
 	function handleDelete() {
 		cardElement.remove();
 	};
-	deleteButton.addEventListener('click', handleDelete);
+	buttonDeleteCard.addEventListener('click', handleDelete);
 
 	imageCard.addEventListener('click', () => {
-		openPopup(popupImage);
-		const image = popupImage.querySelector('.popup__img');
 		const caption = popupImage.querySelector('.popup__caption');
 
 		image.src = imageCard.src;
 		image.alt = imageCard.alt;
 		caption.textContent = nameCerd.textContent;
+		openPopup(popupImage);
 	});
 
 	return cardElement
@@ -56,23 +56,24 @@ initialCards.forEach(function (cards) {
 
 
 //****Открыть popup****
+const buttonPopupEdit = document.querySelector('.profile__edit-button');
+const popupEdit = document.querySelector('.popup_type_edit');
+const profileName = document.querySelector('.profile__name');
+const profileOpsane = document.querySelector('.profile__opsane');
+const buttonPopupAdd = document.querySelector('.profile__add-button');
+const popupAdd = document.querySelector('.popup_type_add');
+
 function openPopup(popup) {
 	popup.classList.add('popup_opened');
 };
 
-const editButtonPopup = document.querySelector('.profile__edit-button');
-const popupEdit = document.querySelector('.popup_edit');
-const profileName = document.querySelector('.profile__name');
-const profileOpsane = document.querySelector('.profile__opsane');
-editButtonPopup.addEventListener('click', () => {
+buttonPopupEdit.addEventListener('click', () => {
 	openPopup(popupEdit);
 	inputNamePopupEdit.value = profileName.textContent;
 	inputOpsanePopupEdit.value = profileOpsane.textContent;
 });
 
-const addButtonPopup = document.querySelector('.profile__add-button');
-const popupAdd = document.querySelector('.popup_add');
-addButtonPopup.addEventListener('click', () => {
+buttonPopupAdd.addEventListener('click', () => {
 	openPopup(popupAdd);
 	inputNamePopupAdd.value = '';
 	inputLinkPopupAdd.value = '';
@@ -81,22 +82,23 @@ addButtonPopup.addEventListener('click', () => {
 
 
 //****Закрыть popup****
+const closeButtonPopupEdit = popupEdit.querySelector('.popup__close-button_edit');
+const closeButtonPopupAdd = popupAdd.querySelector('.popup__close-button_add');
+const popupImage = document.querySelector('.popup_type_image');
+const closeButtonPopupImage = popupImage.querySelector('.popup__close-button_image');
+
 function closePopup(popup) {
 	popup.classList.remove('popup_opened');
 };
 
-const closeButtonPopupEdit = popupEdit.querySelector('.popup__close-button_edit');
 closeButtonPopupEdit.addEventListener('click', () => {
 	closePopup(popupEdit);
 });
 
-const closeButtonPopupAdd = popupAdd.querySelector('.popup__close-button_add');
 closeButtonPopupAdd.addEventListener('click', () => {
 	closePopup(popupAdd);
 });
 
-const popupImage = document.querySelector('.popup_image');
-const closeButtonPopupImage = popupImage.querySelector('.popup__close-button_image');
 closeButtonPopupImage.addEventListener('click', () => {
 	closePopup(popupImage);
 });
