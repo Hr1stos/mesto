@@ -86,32 +86,18 @@ buttonPopupAdd.addEventListener('click', () => {
 
 
 //****Закрыть popup****
-const closeButtonPopupEdit = popupEdit.querySelector('.popup__close-button_edit');
-const closeButtonPopupAdd = popupAdd.querySelector('.popup__close-button_add');
 const popupImage = document.querySelector('.popup_type_image');
-const closeButtonPopupImage = popupImage.querySelector('.popup__close-button_image');
 
 function closePopup(popup) {
 	popup.classList.remove('popup_opened');
+	document.removeEventListener('keydown', closePopupEsc);
 };
 
 function disabledSubmitButton(popup) {
 	const button = popup.querySelector('.popup__submit-button');
 	button.classList.add('popup__submit-button_disabled');
 	button.setAttribute('disabled', '');
-}
-
-closeButtonPopupEdit.addEventListener('click', () => {
-	closePopup(popupEdit);
-});
-
-closeButtonPopupAdd.addEventListener('click', () => {
-	closePopup(popupAdd);
-});
-
-closeButtonPopupImage.addEventListener('click', () => {
-	closePopup(popupImage);
-});
+};
 
 function closePopupEsc(evt) {
 	if (evt.key === 'Escape') {
@@ -119,15 +105,17 @@ function closePopupEsc(evt) {
 	}
 };
 
-function closePopupOverlay(evt) {
-	if (evt.target.classList.contains('popup')) {
-		closePopup(evt.target);
-	}
-};
-
-popupEdit.addEventListener('mousedown', closePopupOverlay);
-popupAdd.addEventListener('mousedown', closePopupOverlay);
-popupImage.addEventListener('mousedown', closePopupOverlay);
+const popups = document.querySelectorAll('.popup');
+popups.forEach(function (popup) {
+	popup.addEventListener('mousedown', (evt) => {
+		if (evt.target.classList.contains('popup_opened')) {
+			closePopup(popup)
+		};
+		if (evt.target.classList.contains('popup__close')) {
+			closePopup(popup)
+		}
+	})
+});
 
 
 
