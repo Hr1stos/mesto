@@ -1,5 +1,6 @@
 import { initialCards } from "./constants.js";
 
+
 //****Создание карточек на страницу, лайки, удаление карточки, открытие PopupImage****
 const cardsTemplate = document.querySelector('.template-cards');
 const image = document.querySelector('.popup__img');
@@ -65,6 +66,7 @@ const popupAdd = document.querySelector('.popup_type_add');
 
 function openPopup(popup) {
 	popup.classList.add('popup_opened');
+	document.addEventListener('keydown', closePopupEsc)
 };
 
 buttonPopupEdit.addEventListener('click', () => {
@@ -75,8 +77,6 @@ buttonPopupEdit.addEventListener('click', () => {
 
 buttonPopupAdd.addEventListener('click', () => {
 	openPopup(popupAdd);
-	inputNamePopupAdd.value = '';
-	inputLinkPopupAdd.value = '';
 });
 
 
@@ -102,6 +102,22 @@ closeButtonPopupAdd.addEventListener('click', () => {
 closeButtonPopupImage.addEventListener('click', () => {
 	closePopup(popupImage);
 });
+
+function closePopupEsc(evt) {
+	if (evt.key === 'Escape') {
+		closePopup(document.querySelector('.popup_opened'))
+	}
+};
+
+function closePopupOverlay(evt) {
+	if (evt.target.classList.contains('popup')) {
+		closePopup(evt.target);
+	}
+};
+
+popupEdit.addEventListener('mousedown', closePopupOverlay);
+popupAdd.addEventListener('mousedown', closePopupOverlay);
+popupImage.addEventListener('mousedown', closePopupOverlay);
 
 
 
