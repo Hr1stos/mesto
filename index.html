@@ -7,7 +7,6 @@
 	<title>Место</title>
 	<link rel="stylesheet" href="./pages/index.css">
 	<script src="./scripts/index.js" type="module"></script>
-	<script src="./scripts/validate.js" type="module"></script>
 </head>
 
 <body class="page">
@@ -46,9 +45,9 @@
 				<button aria-label="Закрыть" type="button" class="popup__close-button popup__close popup__close-button_edit"></button>
 				<h2 class="popup__title">Редактировать профиль</h2>
 				<form name="popup-form" class="popup__form">
-					<input type="text" id="name" name="name" class="popup__input popup__input_type_name" required minlength="2" maxlength="40">
+					<input type="text" id="name" name="name" placeholder="Имя" class="popup__input popup__input_type_name" required minlength="2" maxlength="40">
 					<span id="error-name" class="popup__error"></span>
-					<input type="text" id="opsane" name="opsane" class="popup__input popup__input_type_opsane" required minlength="2" maxlength="200">
+					<input type="text" id="opsane" name="opsane" placeholder="О себе" class="popup__input popup__input_type_opsane" required minlength="2" maxlength="200">
 					<span id="error-opsane" class="popup__error"></span>
 					<button type="submit" class="popup__submit-button">Сохранить</button>
 				</form>

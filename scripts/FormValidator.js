@@ -7,6 +7,8 @@ export default class FormValidator {
 		this._inputErrorClass = config.inputErrorClass;
 		this._errorClass = config.errorClass;
 		this._form = formElement.querySelector(this._formSelector);
+		this._submitButton = this._form.querySelector(this._submitButtonSelector);
+		this._inputsList = Array.from(this._form.querySelectorAll(this._inputSelector));
 	}
 
 	//****Добавть ошибку на инпут****
@@ -48,12 +50,10 @@ export default class FormValidator {
 
 	//****Перекулючатель кнопки****
 	_toggleButtonState() {
-		const submitButton = this._form.querySelector(this._submitButtonSelector);
-
 		if (this._form.checkValidity()) {
-			this._enableButton(submitButton);
+			this._enableButton(this._submitButton);
 		} else {
-			this._disableButton(submitButton);
+			this._disableButton(this._submitButton);
 		}
 	};
 
@@ -65,12 +65,22 @@ export default class FormValidator {
 		});
 	};
 
+	//****Очистки ошибки****
+	resetValidation() {
+		this._toggleButtonState();
+
+		this._inputsList.forEach((inputElement) => {
+				this._hideInputError(inputElement)
+		});
+	};
+
+
 	_setEventListeners() {
 		this._setSubmitListener();
 		this._toggleButtonState();
 
-		const inputsList = Array.from(this._form.querySelectorAll(this._inputSelector));
-		inputsList.forEach((input) => {
+		
+		this._inputsList.forEach((input) => {
 			input.addEventListener('input', () => {
 				this._checkInputValidity(input);
 				this._toggleButtonState();
