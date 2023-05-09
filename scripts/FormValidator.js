@@ -8,7 +8,7 @@ export default class FormValidator {
 		this._errorClass = config.errorClass;
 		this._form = formElement.querySelector(this._formSelector);
 		this._submitButton = this._form.querySelector(this._submitButtonSelector);
-		this._inputsList = Array.from(this._form.querySelectorAll(this._inputSelector));
+		this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
 	}
 
 	//****Добавть ошибку на инпут****
@@ -61,26 +61,25 @@ export default class FormValidator {
 	_setSubmitListener() {
 		this._form.addEventListener('submit', function (event) {
 			event.preventDefault();
-			this._toggleButtonState();
 		});
 	};
 
-	////****Очистки ошибки****
-	//resetValidation() {
-	//	this._toggleButtonState();
+	//****Очистки ошибки****
+	resetValidation() {
+		this._toggleButtonState();
 
-	//	this._inputsList.forEach((errorElement) => {
-	//		this._hideInputError(errorElement)
-	//	});
-	//};
-
+		this._inputList.forEach((input) => {
+			const errorElement = this._form.querySelector(`#error-${input.id}`);
+			this._hideInputError(input, errorElement)
+		});
+	};
 
 	_setEventListeners() {
 		this._setSubmitListener();
 		this._toggleButtonState();
 
 		
-		this._inputsList.forEach((input) => {
+		this._inputList.forEach((input) => {
 			input.addEventListener('input', () => {
 				this._checkInputValidity(input);
 				this._toggleButtonState();
