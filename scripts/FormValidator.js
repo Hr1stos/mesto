@@ -65,14 +65,14 @@ export default class FormValidator {
 		});
 	};
 
-	//****Очистки ошибки****
-	resetValidation() {
-		this._toggleButtonState();
+	////****Очистки ошибки****
+	//resetValidation() {
+	//	this._toggleButtonState();
 
-		this._inputsList.forEach((inputElement) => {
-				this._hideInputError(inputElement)
-		});
-	};
+	//	this._inputsList.forEach((errorElement) => {
+	//		this._hideInputError(errorElement)
+	//	});
+	//};
 
 
 	_setEventListeners() {

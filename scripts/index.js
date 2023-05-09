@@ -37,15 +37,14 @@ export function openPopup(popup) {
 
 buttonPopupEdit.addEventListener('click', () => {
 	openPopup(popupEdit);
-	profileValidator.resetValidation();
+	//profileValidator.resetValidation();
 	inputNamePopupEdit.value = profileName.textContent;
 	inputOpsanePopupEdit.value = profileOpsane.textContent;
-
 });
 
 buttonPopupAdd.addEventListener('click', () => {
 	openPopup(popupAdd);
-	cardValidator.resetValidation();
+	//cardValidator.resetValidation();
 	popupFormAdd.reset();
 });
 
