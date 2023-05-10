@@ -64,7 +64,7 @@ export default class FormValidator {
 		});
 	};
 
-	//****Очистки ошибки****
+	//****Очистка ошибок****
 	resetValidation() {
 		this._toggleButtonState();
 
