@@ -9,6 +9,7 @@ export default class Card {
 	_cardDelete = () => {
 		if (this._card) {
 			this._card.remove();
+			this._card = null;
 		}
 	}
 

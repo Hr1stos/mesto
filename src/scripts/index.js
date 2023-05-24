@@ -1,4 +1,5 @@
-import { initialCards, validationConfig } from "./constants.js";
+import '../pages/index.css';
+
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import PopupWithImage from "./PopupWithImage.js"
@@ -6,32 +7,20 @@ import PopupWithForm from "./PopupWithForm.js";
 import UserInfo from "./UserInfo.js";
 import Section from "./Section.js";
 
-import '../pages/index.css';
-
-
-//****Const****
-const popupEdit = document.querySelector('.popup_type_edit');
-const popupAdd = document.querySelector('.popup_type_add');
-const popupImage = document.querySelector('.popup_type_image');
-const profileName = document.querySelector('.profile__name');
-const profileOpsane = document.querySelector('.profile__opsane');
-const buttonPopupEdit = document.querySelector('.profile__edit-button');
-const buttonPopupAdd = document.querySelector('.profile__add-button');
-const cardsContainer = document.querySelector('.cards__container');
-const inputNamePopupEdit = popupEdit.querySelector('.popup__input_type_name');
-const inputOpsanePopupEdit = popupEdit.querySelector('.popup__input_type_opsane');
-
-const inputNamePopupAdd = popupAdd.querySelector('.popup__input_type_name');
-const inputLinkPopupAdd = popupAdd.querySelector('.popup__input_type_link');
-
-
-const popupFormAdd = popupAdd.querySelector('.popup__form_add');
-const imageCard = popupImage.querySelector('.popup__img');
-const caption = popupImage.querySelector('.popup__caption');
-const popups = document.querySelectorAll('.popup');
-const formPopupEdit = popupEdit.querySelector('.popup__form');
-const formPopupAdd = popupAdd.querySelector('.popup__form');
-
+import {
+	initialCards,
+	validationConfig,
+	popupEdit,
+	popupAdd,
+	popupImage,
+	profileName,
+	profileOpsane,
+	buttonPopupEdit,
+	buttonPopupAdd,
+	cardsContainer,
+	inputNamePopupEdit,
+	inputOpsanePopupEdit
+} from "../utils/constants";
 
 
 //****Валиидация****
@@ -57,13 +46,12 @@ function createCard(data) {
 
 //****Рендер карточек****
 const cards = new Section({
-	items: initialCards,
 	renderer: (data) => {
-		cards.addItem(createCard(data));
-	},
-}, cardsContainer);
+		cards.addItem(createCard(data))
+	}
+}, cardsContainer)
 
-cards.renderCards()
+cards.renderItems(initialCards)
 
 
 //****Открыть popupImage****
@@ -80,6 +68,7 @@ const userInfo = new UserInfo({
 const popupEditForm = new PopupWithForm(popupEdit, {
 	handlerFormSubmit: (data) => {
 		userInfo.setUserInfo(data);
+		popupEditForm.close();
 	}
 });
 popupEditForm.setEventListeners();
@@ -99,7 +88,8 @@ buttonPopupEdit.addEventListener('click', () => {
 //****Открыть popupAdd****
 const popupAddForm = new PopupWithForm(popupAdd, {
 	handlerFormSubmit: (data) => {
-		cards.newAddItem(createCard(data));
+		cards.addItem(createCard(data));
+		popupAddForm.close();
 	}
 });
 popupAddForm.setEventListeners();
