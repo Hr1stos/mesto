@@ -25,7 +25,7 @@ export default class Api {
 		.then(this._handleResponse)
 	}
 
-	setUserData(data) {
+	setDataUser(data) {
 		return fetch(`${this._url}/users/me`, {
 			method: 'PATCH',
 			headers: this._headers,
@@ -38,7 +38,6 @@ export default class Api {
 	}
 
 	setUserAvatar(data) {
-		console.log(data)
 		return fetch(`${this._url}/users/me/avatar`, {
 			method: 'PATCH',
 			headers: this._headers,

@@ -81,7 +81,7 @@
 				<button aria-label="Закрыть" type="button"
 					class="popup__close-button"></button>
 				<h2 class="popup__title">Обновить аватар</h2>
-				<form name="popup-form" class="popup__form">
+				<form name="popup-form" class="popup__form popup__form_type_avatar">
 					<input type="url" id="link" name="avatar" placeholder="Ссылка на аватар" class="popup__input" required>
 					<span id="error-link" class="popup__error"></span>
 					<button type="submit" class="popup__submit-button">Сохранить</button>
@@ -94,8 +94,8 @@
 						<button aria-label="Закрыть" type="button"
 							class="popup__close-button"></button>
 						<h2 class="popup__title popup__title_type_delete">Вы уверены?</h2>
-						<form name="popup-form" class="popup__form">
-							<button type="submit" class="popup__submit-button">Да</button>
+						<form name="popup-form" class="popup__form popup__form_type_delete">
+							<button type="submit" class="popup__submit-button popup__submit-button_type_delete">Да</button>
 						</form>
 					</div>
 				</div>

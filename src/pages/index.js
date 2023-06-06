@@ -8,6 +8,7 @@ import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
 import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import Api from "../components/Api.js";
+import { loading } from '../utils/utils.js';
 
 import {
 	validationConfig,
@@ -69,7 +70,7 @@ function createCard(data) {
 		handleDeleteClick: () => {
 			popupWithConfirm.open();
 			popupWithConfirm.submitCallback(() => {
-				//setSubmitButtonText(formDelete, 'Удаление...');
+				loading(popupDelete, 'Удаление...');
 				api.deleteCard(card.getId())
 					.then(() => {
 						card.deleteCard();
@@ -78,9 +79,9 @@ function createCard(data) {
 					.catch((err) => {
 						console.log(`deleteCard - ошибка: ${err}`);
 					})
-				//.finally(() => {
-				//	setSubmitButtonText(formDelete, 'Да')
-				//})
+				.finally(() => {
+					loading(popupDelete, 'Да');
+				})
 			})
 		},
 		handleSetLike: (cardId) => {
@@ -136,12 +137,11 @@ const popupWithConfirm = new PopupWithConfirm(popupDelete);
 popupWithConfirm.setEventListeners();
 
 
-
 //****Открыть popupEdit****
 const popupEditForm = new PopupWithForm(popupEdit, {
 	handleFormSubmit: (data) => {
-		//setSubmitButtonText(formProfile, 'Cохранение...');
-		api.setUserData(data)
+		loading(popupEdit, 'Сохранение...');
+		api.setDataUser(data)
 			.then((res) => {
 				userInfo.setUserInfo(res);
 				popupEditForm.close();
@@ -149,12 +149,13 @@ const popupEditForm = new PopupWithForm(popupEdit, {
 			.catch((err) => {
 				console.log(`setDataUser - ошибка: ${err}`);
 			})
-			//.finally(() => {
-			//	setSubmitButtonText(formProfile, 'Сохранить');
-			//})
+			.finally(() => {
+				loading(popupEdit, 'Сохранить');
+			})
 	}
 })
 popupEditForm.setEventListeners();
+
 
 
 buttonPopupEdit.addEventListener('click', () => {
@@ -171,18 +172,18 @@ buttonPopupEdit.addEventListener('click', () => {
 //****Открыть popupAvatar****
 const popupAvatarForm = new PopupWithForm(popupAvatar, {
 	handleFormSubmit: (data) => {
-		//setSubmitButtonText(formAvatar, 'Сохранение...');
+		loading(popupAvatar, 'Сохранение...');
 		api.setUserAvatar(data)
 			.then((res) => {
 				userInfo.setUserInfo(res)
 				popupAvatarForm.close();
 			})
-		//.catch((err) => {
-		//	console.log(`setUserAvatar - ошибка: ${err}`);
-		//})
-		//.finally(() => {
-		//	setSubmitButtonText(formAvatar, 'Сохранить')
-		//})
+		.catch((err) => {
+			console.log(`setUserAvatar - ошибка: ${err}`);
+		})
+		.finally(() => {
+			loading(popupAvatar, 'Сохранить');
+		})
 	}
 })
 popupAvatarForm.setEventListeners();
@@ -196,7 +197,7 @@ buttonPopupAvatar.addEventListener('click', () => {
 //****Открыть popupAdd****
 const popupAddForm = new PopupWithForm(popupAdd, {
 	handleFormSubmit: (data) => {
-		//setSubmitButtonText(formNewCard, 'Сохранение...')
+		loading(popupAdd, 'Сохранение...');
 		api.addNewCard(data)
 			.then((res) => {
 				cardsList.addItem(createCard(res), 'prepend');
@@ -205,9 +206,9 @@ const popupAddForm = new PopupWithForm(popupAdd, {
 			.catch((err) => {
 				console.log(`addNewCard - ошибка: ${err}`);
 			})
-			//.finally(() => {
-			//	setSubmitButtonText(formNewCard, 'Создать')
-			//})
+			.finally(() => {
+				loading(popupAdd, 'Создать');
+			})
 	}
 })
 popupAddForm.setEventListeners();
