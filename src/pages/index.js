@@ -6,21 +6,46 @@ import PopupWithImage from "../components/PopupWithImage.js"
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
+import Api from "../components/Api.js";
 
 import {
-	initialCards,
 	validationConfig,
 	popupEdit,
 	popupAdd,
 	popupImage,
+	popupDelete,
+	popupAvatar,
 	profileName,
 	profileOpsane,
+	profileAvatar,
+	buttonPopupAvatar,
 	buttonPopupEdit,
 	buttonPopupAdd,
 	cardsContainer,
 	inputNamePopupEdit,
-	inputOpsanePopupEdit
+	inputAboutPopupEdit
 } from "../utils/constants";
+
+let userId = null;
+
+const api = new Api({
+	url: 'https://mesto.nomoreparties.co/v1/cohort-68',
+	headers: {
+		authorization: '44c177c0-bcd0-4b30-8fcb-5adcdab7ad45',
+		'Content-Type': 'application/json',
+	}
+})
+
+Promise.all([api.getDataUser(), api.getDataCards()])
+	.then(([data, items]) => {
+		userId = data._id;
+		userInfo.setUserInfo(data);
+		cardsList.renderItems(items);
+	})
+	.catch((err) => {
+		console.log(`Promise.all - ошибка: ${err}`);
+	});
 
 
 //****Валиидация****
@@ -30,15 +55,54 @@ profileValidator.enableValidation();
 const cardValidator = new FormValidator(validationConfig, popupAdd);
 cardValidator.enableValidation();
 
+const avatarValidator = new FormValidator(validationConfig, popupAvatar);
+avatarValidator.enableValidation();
+
 
 //****Создание карточек на странцу****
 function createCard(data) {
 	const card = new Card({
 		data: data,
 		handleCardClick: (name, link) => {
-			popupFullImage.open(name, link);
-		}
-	}, '.template-cards');
+			popupWithImage.open(name, link);
+		},
+		handleDeleteClick: () => {
+			popupWithConfirm.open();
+			popupWithConfirm.submitCallback(() => {
+				//setSubmitButtonText(formDelete, 'Удаление...');
+				api.deleteCard(card.getId())
+					.then(() => {
+						card.deleteCard();
+						popupWithConfirm.close();
+					})
+					.catch((err) => {
+						console.log(`deleteCard - ошибка: ${err}`);
+					})
+				//.finally(() => {
+				//	setSubmitButtonText(formDelete, 'Да')
+				//})
+			})
+		},
+		handleSetLike: (cardId) => {
+			api.setLike(cardId)
+				.then((data) => {
+					card.handleLike(data);
+				})
+				.catch((err) => {
+					console.log(`handleSetLike - ошибка: ${err}`);
+				});
+		},
+		handleDeleteLike: (cardId) => {
+			api.deleteLike(cardId)
+				.then((data) => {
+					card.handleLike(data);
+				})
+				.catch((err) => {
+					console.log(`handleDeleteLike - ошибка: ${err}`);
+				});
+		},
+	}, '.template-cards', userId);
+
 	const cardElement = card.getCard();
 
 	return cardElement;
@@ -46,32 +110,50 @@ function createCard(data) {
 
 
 //****Рендер карточек****
-const cards = new Section({
+const cardsList = new Section({
 	renderer: (data) => {
-		cards.addItem(createCard(data))
+		const cardArray = createCard(data);
+		cardsList.addItem(cardArray, 'append');
 	}
 }, cardsContainer)
 
-cards.renderItems(initialCards)
+
+//****Информации о пользователе****
+const userInfo = new UserInfo({
+	selectorUserName: profileName,
+	selectorUserAbout: profileOpsane,
+	selectorUserAvatar: profileAvatar,
+});
 
 
 //****Открыть popupImage****
-const popupFullImage = new PopupWithImage(popupImage);
-popupFullImage.setEventListener();
+const popupWithImage = new PopupWithImage(popupImage);
+popupWithImage.setEventListener();
+
+
+//****Открыть popupDelete****
+const popupWithConfirm = new PopupWithConfirm(popupDelete);
+popupWithConfirm.setEventListeners();
+
 
 
 //****Открыть popupEdit****
-const userInfo = new UserInfo({
-	name: profileName,
-	opsane: profileOpsane
-});
-
 const popupEditForm = new PopupWithForm(popupEdit, {
-	handlerFormSubmit: (data) => {
-		userInfo.setUserInfo(data);
-		popupEditForm.close();
+	handleFormSubmit: (data) => {
+		//setSubmitButtonText(formProfile, 'Cохранение...');
+		api.setUserData(data)
+			.then((res) => {
+				userInfo.setUserInfo(res);
+				popupEditForm.close();
+			})
+			.catch((err) => {
+				console.log(`setDataUser - ошибка: ${err}`);
+			})
+			//.finally(() => {
+			//	setSubmitButtonText(formProfile, 'Сохранить');
+			//})
 	}
-});
+})
 popupEditForm.setEventListeners();
 
 
@@ -80,19 +162,54 @@ buttonPopupEdit.addEventListener('click', () => {
 
 	const currentUserInfo = userInfo.getUserInfo();
 	inputNamePopupEdit.value = currentUserInfo.name;
-	inputOpsanePopupEdit.value = currentUserInfo.opsane;
+	inputAboutPopupEdit.value = currentUserInfo.about;
 
 	popupEditForm.open();
 });
 
 
+//****Открыть popupAvatar****
+const popupAvatarForm = new PopupWithForm(popupAvatar, {
+	handleFormSubmit: (data) => {
+		//setSubmitButtonText(formAvatar, 'Сохранение...');
+		api.setUserAvatar(data)
+			.then((res) => {
+				userInfo.setUserInfo(res)
+				popupAvatarForm.close();
+			})
+		//.catch((err) => {
+		//	console.log(`setUserAvatar - ошибка: ${err}`);
+		//})
+		//.finally(() => {
+		//	setSubmitButtonText(formAvatar, 'Сохранить')
+		//})
+	}
+})
+popupAvatarForm.setEventListeners();
+
+buttonPopupAvatar.addEventListener('click', () => {
+	avatarValidator.resetValidation();
+	popupAvatarForm.open();
+});
+
+
 //****Открыть popupAdd****
 const popupAddForm = new PopupWithForm(popupAdd, {
-	handlerFormSubmit: (data) => {
-		cards.addItem(createCard(data));
-		popupAddForm.close();
+	handleFormSubmit: (data) => {
+		//setSubmitButtonText(formNewCard, 'Сохранение...')
+		api.addNewCard(data)
+			.then((res) => {
+				cardsList.addItem(createCard(res), 'prepend');
+				popupAddForm.close();
+			})
+			.catch((err) => {
+				console.log(`addNewCard - ошибка: ${err}`);
+			})
+			//.finally(() => {
+			//	setSubmitButtonText(formNewCard, 'Создать')
+			//})
 	}
-});
+})
 popupAddForm.setEventListeners();
 
 

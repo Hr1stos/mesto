@@ -5,11 +5,11 @@
 	background-size: contain;
 	width: 22px;
 	height: 19px;
-	margin: 5px 5px 0 0;
 	cursor: pointer;
 	transition: opacity .3s ease;
 	padding: 0;
   border: none;
+	display: block;
 }
 
 .cards__button_like:hover {

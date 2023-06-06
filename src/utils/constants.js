@@ -1,29 +1,29 @@
-const initialCards = [
-	{
-		name: 'Канада',
-		link: 'https://images.unsplash.com/photo-1502003148287-a82ef80a6abc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGNhbmFkYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'
-	},
-	{
-		name: 'Аргентина',
-		link: 'https://images.unsplash.com/photo-1610680224983-f9759ce81c7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fGFyZ2VudGluYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'
-	},
-	{
-		name: 'Швейцария',
-		link: 'https://images.unsplash.com/photo-1675503989795-a5661ebd1536?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fHNjaHdlaXplcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'
-	},
-	{
-		name: 'США',
-		link: 'https://images.unsplash.com/photo-1580752300984-a479ef2f97dc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fHVzYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'
-	},
-	{
-		name: 'Грузия',
-		link: 'https://images.unsplash.com/photo-1568490891363-466fe21bede2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=290&q=80'
-	},
-	{
-		name: 'Россия',
-		link: 'https://images.unsplash.com/photo-1520106212299-d99c443e4568?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
-	}
-];
+//const initialCards = [
+//	{
+//		name: 'Канада',
+//		link: 'https://images.unsplash.com/photo-1502003148287-a82ef80a6abc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGNhbmFkYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'
+//	},
+//	{
+//		name: 'Аргентина',
+//		link: 'https://images.unsplash.com/photo-1610680224983-f9759ce81c7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fGFyZ2VudGluYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'
+//	},
+//	{
+//		name: 'Швейцария',
+//		link: 'https://images.unsplash.com/photo-1675503989795-a5661ebd1536?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fHNjaHdlaXplcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'
+//	},
+//	{
+//		name: 'США',
+//		link: 'https://images.unsplash.com/photo-1580752300984-a479ef2f97dc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fHVzYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'
+//	},
+//	{
+//		name: 'Грузия',
+//		link: 'https://images.unsplash.com/photo-1568490891363-466fe21bede2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=290&q=80'
+//	},
+//	{
+//		name: 'Россия',
+//		link: 'https://images.unsplash.com/photo-1520106212299-d99c443e4568?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
+//	}
+//];
 
 const validationConfig = {
 	formSelector: '.popup__form',
@@ -37,25 +37,32 @@ const validationConfig = {
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupAdd = document.querySelector('.popup_type_add');
 const popupImage = document.querySelector('.popup_type_image');
+const popupAvatar = document.querySelector('.popup_type_avatar');
+const popupDelete = document.querySelector('.popup_type_delete');
 const profileName = document.querySelector('.profile__name');
 const profileOpsane = document.querySelector('.profile__opsane');
+const profileAvatar = document.querySelector('.profile__avatar');
+const buttonPopupAvatar= document.querySelector('.profile__avatar-edit-button');
 const buttonPopupEdit = document.querySelector('.profile__edit-button');
 const buttonPopupAdd = document.querySelector('.profile__add-button');
 const cardsContainer = document.querySelector('.cards__container');
 const inputNamePopupEdit = popupEdit.querySelector('.popup__input_type_name');
-const inputOpsanePopupEdit = popupEdit.querySelector('.popup__input_type_opsane');
+const inputAboutPopupEdit = popupEdit.querySelector('.popup__input_type_about');
 
 export { 
-	initialCards, 
 	validationConfig,
 	popupEdit,
 	popupAdd,
 	popupImage,
+	popupAvatar,
+	popupDelete,
 	profileName,
 	profileOpsane,
+	profileAvatar,
+	buttonPopupAvatar,
 	buttonPopupEdit,
 	buttonPopupAdd,
 	cardsContainer,
 	inputNamePopupEdit,
-	inputOpsanePopupEdit
+	inputAboutPopupEdit
 };
